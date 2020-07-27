@@ -4,20 +4,18 @@ public class Player {
 
 private ArrayList<Card> dealtCards;
 private String name;
-private Boolean winner;
+private int handValue;
+private boolean isWinner;
 
   public Player(String name) {
     this.name = name;
-    this.winner = false;
+    this.handValue = 0;
     this.dealtCards = new ArrayList<Card>();
+    this.isWinner = false;
   }
 
   public String getName() {
     return this.name;
-  }
-
-  public Boolean isWinner() {
-    return this.winner;
   }
 
   public ArrayList<Card> getDealtCards() {
@@ -28,18 +26,17 @@ private Boolean winner;
     return this.dealtCards.size();
   }
 
+  public int getHandValue(){ return this.handValue; }
+
+  public void isWinner(){ this.isWinner = true; }
+
+  public void addToHandTotal(Card card) {
+    this.handValue += card.getValueFromEnum();
+  }
+
   public void receiveCard(Deck deck) {
     Card dealtCard = deck.dealCard();
+    addToHandTotal(dealtCard);
     this.dealtCards.add(dealtCard);
   }
-
-  public void setWinner(){
-    this.winner = true;
-  }
-
-//  public int getValueOfCard(){
-//
-//  }
-  
-
 }

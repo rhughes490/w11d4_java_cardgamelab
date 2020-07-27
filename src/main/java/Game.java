@@ -3,24 +3,29 @@ import java.util.ArrayList;
 public class Game {
 
   private ArrayList<Player> players;
+  private Dealer dealer;
 
 
-    public Game(){
+  public Game(){
     this.players = new ArrayList<Player>();
+    this.dealer = new Dealer();
   }
 
   public void addPlayer(Player player){
     this.players.add(player);
   }
 
-  public void winnerPlayer(Player player1, Player player2) {
-    Card player1card = player1.getDealtCards().get(0);
-    Card player2card = player2.getDealtCards().get(0);
-    if (player1card.getValueFromEnum() > player2card.getValueFromEnum()){
-      player1.setWinner();
-    } else {
-      player2.setWinner();
+  public Dealer getDealer() { return this.dealer; }
+
+  public void getResult(){
+    for (Player player : this.players) {
+      if (player.getHandValue() > this.dealer.getHandValue() && !player.isBust()); {
+        player.isWinner();
+      } else {
+        this.dealer.isWinner();
+      }
     }
+  }
 
 
   }
